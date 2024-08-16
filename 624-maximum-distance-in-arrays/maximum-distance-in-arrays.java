@@ -1,0 +1,25 @@
+class Solution {
+    public int maxDistance(List<List<Integer>> arrays) 
+    {
+    if(arrays==null || arrays.size()<2)
+    {
+        return 0;
+    }
+    int globalMin = arrays.get(0).get(0);
+    int globalMax = arrays.get(0).get(arrays.get(0).size()-1);
+    int result=0;
+
+    for(int i=1;i<arrays.size();i++)
+    {
+        List<Integer> temp= arrays.get(i);
+        int localMin=temp.get(0);
+        int localMax=temp.get(temp.size()-1);
+
+        result = Math.max(result,Math.max(localMax-globalMin,globalMax-localMin));
+
+        globalMin=Math.min(globalMin,localMin);
+        globalMax=Math.max(globalMax,localMax);
+    }
+    return result;
+    }
+}
