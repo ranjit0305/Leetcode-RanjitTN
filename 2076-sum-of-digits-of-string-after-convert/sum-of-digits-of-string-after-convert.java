@@ -12,13 +12,14 @@ class Solution {
         }
 
         // Perform the transformations k times
-        while (k-- > 1) {  // We already calculated the initial sum once
+        while (k > 1) {  // We already calculated the initial sum once
             int newSum = 0;
             while (sum > 0) {
                 newSum += sum % 10;  // Add each digit to newSum
                 sum /= 10;
             }
             sum = newSum;
+            k--;
         }
         return sum;
     }
