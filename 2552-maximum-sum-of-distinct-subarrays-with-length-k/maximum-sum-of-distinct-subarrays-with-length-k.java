@@ -1,33 +1,38 @@
 class Solution {
     public long maximumSubarraySum(int[] nums, int k) {
-        int i=0,j=0,n=nums.length;
-        long ans = Long.MIN_VALUE;
-        long sum = 0;
-        HashSet<Integer> hs = new HashSet<>();
-        while(j<n){
-            if(hs.contains(nums[j]) && i<n){
-                sum-=nums[i];
-                hs.remove(nums[i]);
-                i++;
-            }else{
-                if(j-i+1==k){
-                    sum+=nums[j];
-                    hs.add(nums[j]);
-                    j++;
-                    ans = Math.max(ans,sum);
-                }else if(j-i+1<k){
-                    sum+=nums[j];
-                    hs.add(nums[j]);
-                    j++;
-                }else if(j-i+1>k){
-                    sum-=nums[i];
-                    hs.remove(nums[i]);
-                    i++;
-                }
-            }
-            System.out.println(i+" "+j);
+        int maxNum = 0;
+        for(int num:nums){
+            maxNum = Math.max(maxNum,num);
         }
-        System.out.println(ans);
-        return (ans>0?ans:0);
+        int[] counts = new int[maxNum+1];
+        int dupCount=0;
+        long totalSum=0;
+        long curSum =0;
+        for(int i =0;i<k;i++){
+            if(counts[nums[i]]>=1){
+                dupCount++;
+            }
+            counts[nums[i]]++;
+            curSum+= nums[i];
+        }
+        if(dupCount==0){
+            totalSum=curSum;
+        }
+        for(int i =k;i<nums.length;i++){
+            if(counts[nums[i]]>=1){
+                dupCount++;
+            }
+            counts[nums[i]]++;
+            curSum+= nums[i];  
+            if(counts[nums[i-k]]>1){
+                dupCount--;
+            }
+            counts[nums[i-k]]--;
+            curSum-=nums[i-k];
+            if(dupCount==0){
+                totalSum = Math.max(totalSum,curSum);
+            } 
+        }
+        return totalSum;
     }
 }
