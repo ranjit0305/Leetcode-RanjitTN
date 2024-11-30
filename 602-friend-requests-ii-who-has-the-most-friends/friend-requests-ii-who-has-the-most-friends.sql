@@ -1,8 +1,17 @@
 # Write your MySQL query statement below
-select id,count(*) as num from(
-select requester_id as id from RequestAccepted
-union all
-select accepter_id as id from RequestAccepted) temp
-group by id
-order by count(*) desc
-limit 1
+WITH all_people AS(
+SELECT requester_id, accepter_id FROM RequestAccepted
+UNION ALL
+SELECT accepter_id, requester_id FROM RequestAccepted
+)
+SELECT
+requester_id AS id
+,COUNT(accepter_id) AS num
+
+FROM all_people
+
+GROUP BY requester_id
+
+ORDER BY num DESC
+
+LIMIT 1;
