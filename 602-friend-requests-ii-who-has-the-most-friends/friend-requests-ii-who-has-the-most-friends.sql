@@ -1,17 +1,9 @@
-# Write your MySQL query statement below
-WITH all_people AS(
-SELECT requester_id, accepter_id FROM RequestAccepted
-UNION ALL
-SELECT accepter_id, requester_id FROM RequestAccepted
-)
-SELECT
-requester_id AS id
-,COUNT(accepter_id) AS num
 
-FROM all_people
+select id, count(*) as num
+from (select requester_id as id from RequestAccepted
+        union all
+        select accepter_id as id from RequestAccepted) as friends_count
+group by id
+order by num desc limit 1
 
-GROUP BY requester_id
-
-ORDER BY num DESC
-
-LIMIT 1;
+                
