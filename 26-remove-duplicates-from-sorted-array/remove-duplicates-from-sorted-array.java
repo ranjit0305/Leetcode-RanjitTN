@@ -16,7 +16,8 @@ class Solution {
         int index = 0;
         for (int i = 0; i < freq.length; i++) {
             if (freq[i] > 0) {
-                nums[index++] = i + min;
+                nums[index] = i + min;
+                index++;
             }
         }
 
