@@ -15,7 +15,7 @@ class Solution {
             if (nums[i] == start + 1) {
                 cnt++;
                 start = nums[i];
-            } else if (nums[i] != start) { 
+            } else if (nums[i]!= start) { 
                 start = nums[i]; 
                 cnt = 1; 
             }
