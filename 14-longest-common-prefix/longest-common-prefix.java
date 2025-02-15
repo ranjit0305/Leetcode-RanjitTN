@@ -12,7 +12,7 @@ class Solution {
                     return ans.toString();
                 }
             }
-            ans.append(c); // If all match, append to the result
+            ans.append(c);
         }
 
         return ans.toString();
