@@ -1,30 +1,33 @@
 class Solution {
+
     public int minCapability(int[] nums, int k) {
-        int left = Integer.MAX_VALUE, right = Integer.MIN_VALUE;
+        int mid = 0;
+        int count;
+        int max = Integer.MIN_VALUE;
+        int min = Integer.MAX_VALUE;
+        int ans = Integer.MAX_VALUE;
+
         for (int num : nums) {
-            left = Math.min(left, num);   // Minimum element in nums[]
-            right = Math.max(right, num); // Maximum element in nums[]
+            max = Math.max(num, max);
+            min = Math.min(num, min);
         }
 
-        while (left < right) {
-            int mid = left + (right - left) / 2;
-            if (canSelect(nums, k, mid)) {
-                right = mid; // Try a smaller max capability
+        while (min <= max) {
+            mid = min + ((max - min) >> 1);
+            count = 0;
+            for (int i = 0; i < nums.length; i++) {
+                if (mid >= nums[i]) {
+                    count++;
+                    i++;
+                }
+            }
+            if (count >= k) {
+                ans = mid;
+                max = mid - 1;
             } else {
-                left = mid + 1; // Increase the capability limit
+                min = mid + 1;
             }
         }
-        return left;
-    }
-
-    private boolean canSelect(int[] nums, int k, int maxCap) {
-        int count = 0;
-        for (int i = 0; i < nums.length; i++) {
-            if (nums[i] <= maxCap) {
-                count++;
-                i++; // Skip adjacent element to maintain non-adjacency
-            }
-        }
-        return count >= k;
+        return ans;
     }
 }
