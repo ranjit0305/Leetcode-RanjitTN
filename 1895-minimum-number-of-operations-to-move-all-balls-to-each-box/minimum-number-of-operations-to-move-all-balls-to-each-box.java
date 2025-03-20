@@ -20,7 +20,6 @@ class Solution {
             right--;
         }
         for(i=1;i<n;i++){
-            //System.out.println(ans+" "+left+" "+right);
             ans=ans-right;
             ans=ans+left;
             if(ch[i]=='1'){
