@@ -22,9 +22,6 @@ class Solution {
                     break;
                 }
             }
-            if (!found) {
-                ans[i] = -1;
-            }
         }
         return ans;
     }
