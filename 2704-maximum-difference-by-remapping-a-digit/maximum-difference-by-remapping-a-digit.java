@@ -1,31 +1,37 @@
 class Solution {
     public int minMaxDifference(int num) {
-        String number = Integer.toString(num);
-        char[] arr = number.toCharArray();
-        String max = "";
-        String min = "";
-        char firstNonNine = 0;
-        for (int i = 0; i < arr.length; i++) {
-            if (arr[i] != '9') {
-                firstNonNine = arr[i];
+        String str = Integer.toString(num);
+        char[] maxChars = str.toCharArray();
+        char[] minChars = str.toCharArray();
+
+        // Step 1: Find first non-9 digit for max replacement
+        char replaceForMax = ' ';
+        for (char c : maxChars) {
+            if (c != '9') {
+                replaceForMax = c;
                 break;
             }
         }
-        for (int i = 0; i < arr.length; i++) {
-            if (arr[i] == firstNonNine) {
-                max += '9';
-            } else {
-                max += arr[i];
+
+        // Step 2: Replace that digit with 9 for max
+        for (int i = 0; i < maxChars.length; i++) {
+            if (maxChars[i] == replaceForMax) {
+                maxChars[i] = '9';
             }
         }
-        char firstDigit = arr[0];
-        for (int i = 0; i < arr.length; i++) {
-            if (arr[i] == firstDigit) {
-                min += '0';
-            } else {
-                min += arr[i];
+
+        // Step 3: Replace first digit for min with 0
+        char replaceForMin = minChars[0];
+        for (int i = 0; i < minChars.length; i++) {
+            if (minChars[i] == replaceForMin) {
+                minChars[i] = '0';
             }
         }
-        return Integer.parseInt(max) - Integer.parseInt(min);
+
+        // Step 4: Convert and calculate result
+        int maxVal = Integer.parseInt(new String(maxChars));
+        int minVal = Integer.parseInt(new String(minChars));
+
+        return maxVal - minVal;
     }
 }
