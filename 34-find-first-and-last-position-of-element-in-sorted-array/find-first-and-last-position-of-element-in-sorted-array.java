@@ -1,29 +1,16 @@
 class Solution {
     public int[] searchRange(int[] nums, int target) {
-        int n = nums.length;
-        if (n == 0) return new int[]{-1, -1};
-        int low = 0, high = n - 1;
-        while (low < high) {
-            int mid = (low + high) / 2;
-            if (nums[mid] < target) {
-                low = mid + 1;
-            } else {
-                high = mid;
-            }
+        int[] res = new int[]{-1, -1};
+
+for (int i = 0; i < nums.length; i++) {
+    if (nums[i] == target) {
+        if (res[0] == -1) {
+            res[0] = i;  // first occurrence
         }
-        int left = low;
-        if (nums[low] != target) {
-            return new int[]{-1, -1};
-        }
-        high = n - 1;
-        while (low < high) {
-            int mid = (low + high) / 2 + 1;
-            if (nums[mid] > target) {
-                high = mid - 1;
-            } else {
-                low = mid;
-            }
-        }
-        return new int[]{left, high};
+        res[1] = i;      // keep updating to last occurrence
+    }
+}
+return res;
+
     }
 }
