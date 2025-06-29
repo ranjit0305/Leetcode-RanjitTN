@@ -1,16 +1,14 @@
 class Solution {
     public int maxCandies(int[] status, int[] candies, int[][] keys, int[][] containedBoxes, int[] initialBoxes) {
         int n = status.length;
-        boolean[] vis = new boolean[n];         // whether box has been visited (opened)
-        boolean[] hasBox = new boolean[n];      // whether we have the box
-        boolean changed;                        // whether any new box got opened
+        boolean[] vis = new boolean[n];      
+        boolean[] hasBox = new boolean[n];   
+        boolean changed;                   
         int total = 0;
-
         // Initialize hasBox[] from initialBoxes
         for (int box : initialBoxes) {
             hasBox[box] = true;
         }
-
         do {
             changed = false;
             for (int i = 0; i < n; i++) {
