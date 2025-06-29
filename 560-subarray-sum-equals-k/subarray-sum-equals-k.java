@@ -3,17 +3,17 @@ class Solution {
         int cnt = 0;
         
         for (int i = 0; i < nums.length; i++) {
-            int sum = 0; // Initialize sum for the current subarray
+            int sum = 0;
             
             for (int j = i; j < nums.length; j++) {
-                sum += nums[j]; // Add the current element to the sum
+                sum += nums[j];
                 
                 if (sum == k) {
-                    cnt++; // Increment count if the sum matches k
+                    cnt++;
                 }
             }
         }
         
-        return cnt; // Return the total count of subarrays
+        return cnt;
     }
 }
