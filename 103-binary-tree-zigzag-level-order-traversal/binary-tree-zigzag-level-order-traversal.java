@@ -8,7 +8,7 @@ class Solution {
         }
 
         boolean leftToRight = true;
-        que.offer(root);
+        que.add(root);
 
         while (!que.isEmpty()) {
             int level = que.size();
@@ -22,10 +22,10 @@ class Solution {
                     temp.addFirst(current.val);
                 }
                 if (current.left != null) {
-                    que.offer(current.left);
+                    que.add(current.left);
                 }
                 if (current.right != null) {
-                    que.offer(current.right);
+                    que.add(current.right);
                 }
             }
             wrapped.add(temp);
