@@ -1,15 +1,11 @@
-class Solution 
-{
-    public int repeatedNTimes(int[] nums) 
-    {
-        Arrays.sort(nums);
-        for(int i=0;i<nums.length-1;i++)
+class Solution {
+    public int repeatedNTimes(int[] nums) {
+        Set<Integer> s = new HashSet<>();
+        for(int i:nums)
         {
-            if(nums[i+1]==nums[i])
-            {
-                return nums[i];
-            }
+            if(!s.add(i))
+              return i;
         }
-        return 0;
+        return nums[nums.length-1];
     }
 }
