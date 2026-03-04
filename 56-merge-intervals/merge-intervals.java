@@ -1,20 +1,36 @@
-import java.util.Arrays;
-
 class Solution {
-    public int[][] merge(int[][] intervals) {
-        Arrays.sort(intervals, (a, b) -> Integer.compare(a[0], b[0]));
-
-        int[][] arr = new int[intervals.length][2];
-        int k = 0;
-        for (int i = 0; i < intervals.length; i++) {
-            arr[k][0] = intervals[i][0];
-            arr[k][1] = intervals[i][1];
-            while (i < intervals.length - 1 && arr[k][1] >= intervals[i + 1][0]) {
-                arr[k][1] = Math.max(arr[k][1], intervals[i + 1][1]);
-                i++;
+    public int[][] merge(int[][] intervals)
+    {
+        Arrays.sort(intervals,(a,b)->a[0]-b[0]);
+        List<Integer> arr=new ArrayList<>(); 
+        arr.add(intervals[0][0]);
+        int max=intervals[0][1];
+        for(int i=1;i<intervals.length;i++)
+        {
+            if(intervals[i][0]<=max)
+            {
+                max = Math.max(max, intervals[i][1]);
             }
-            k++;
+            else if(intervals[i][0]>max)
+            {
+                arr.add(max);
+                arr.add(intervals[i][0]);
+                max=intervals[i][1];
+            }
         }
-        return Arrays.copyOf(arr, k);
+        arr.add(max);
+        int n=arr.size()/2;
+        int[][] res=new int[n][2];
+        int j=0;
+        int k=0;
+        int[] temp = new int[2];
+         int idx = 0;
+        for(int i=0;i<arr.size();i+=2)
+        {
+            res[idx][0] = arr.get(i);
+            res[idx][1] = arr.get(i+1);
+            idx++;
+        }
+        return res;
     }
 }
