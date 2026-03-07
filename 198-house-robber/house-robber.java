@@ -1,19 +1,23 @@
 class Solution {
-    public int rob(int[] nums) {
-        int n = nums.length;
-        if (n == 0) return 0;
-        if (n == 1) return nums[0];
-
-        int[] dp = new int[n];
-        dp[0] = nums[0];
-        dp[1] = Math.max(nums[0], nums[1]);
-
-        for (int i = 2; i < n; i++) {
-            int rob = nums[i] + dp[i - 2];  // Rob this house, skip one
-            int skip = dp[i - 1];           // Skip this house
-            dp[i] = Math.max(rob, skip);
+    public int rob(int[] nums)
+    {
+        int dp[] =new int[nums.length];
+        Arrays.fill(dp,-1);
+        int first=findMaxProf(0,nums,dp);
+        int second=findMaxProf(1,nums,dp);
+        return Math.max(first,second);
+    }
+    public int findMaxProf(int index,int[] nums,int[] dp) 
+    {
+        if(index >= nums.length)
+        {
+            return 0;
         }
-
-        return dp[n - 1];
+        if (dp[index]!=-1) return dp[index];
+        //skip
+        int skip=findMaxProf(index+1,nums,dp);
+        //take
+        int take=nums[index]+findMaxProf(index+2,nums,dp);
+        return dp[index]=Math.max(skip,take);
     }
 }
