@@ -1,22 +1,20 @@
 class Solution {
-    public long sumAndMultiply(int n) 
-    {
-        String s="";
-        int sum=0;
-        if(n==0) return 0;
-        while(n!=0)
-        {
-            int temp=n%10;
-            if(temp!=0)
-            {
-            s=s+Integer.toString(temp);
-            sum=sum+temp;
-            }
-            n=n/10;
-        }    
-        String reversed = new StringBuilder(s).reverse().toString();
-    long r=Long.parseLong(reversed);
-    return r*sum;   
-        
+    public long sumAndMultiply(int n) {
+        long num=0;
+        long sum=0;
+        long ans=0;
+        while(n!=0){
+            if(n%10!=0){
+                num=num*10+n%10;
+                sum+=n%10;
+                
+            }n/=10;
+        }
+         while(num!=0){
+            ans=ans*10+num%10;
+            num/=10;
+        }
+        return ans*sum;
+
     }
 }
