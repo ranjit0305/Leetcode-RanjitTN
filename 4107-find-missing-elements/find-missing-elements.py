@@ -1,15 +1,14 @@
 class Solution(object):
     def findMissingElements(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: List[int]
-        """
-        res=[]
-        nums.sort()
-        lar=nums[len(nums)-1]
-        small=nums[0]
-        for i in range(small,lar):
-            if i not in nums:
-                res.append(i)
-        return res
-        
+        s = set(nums)
+
+        smallest = min(nums)
+        largest = max(nums)
+
+        missing = []
+
+        for i in range(smallest + 1, largest):
+            if i not in s:
+                missing.append(i)
+
+        return missing
