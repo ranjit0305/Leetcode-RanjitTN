@@ -4,21 +4,23 @@ class Solution {
         for (int num : nums) {
             numSet.add(num);
         }
-
-        int longest = 0;
-
-        for (int num : numSet) {
-            if (!numSet.contains(num - 1)) {
-                int length = 1;
-
-                while (numSet.contains(num + length)) {
-                    length++;
-                }
-
-                longest = Math.max(longest, length);
-            }
+        int longest=1;
+        if(numSet.size()==0)
+        {
+            return 0;
         }
-
-        return longest;        
+        for(int num:numSet)
+        {
+            if(!numSet.contains(num-1))
+            {
+                int temp=1;
+                while(numSet.contains(num+temp))
+                {
+                    temp++;
+                }
+                longest=Math.max(longest,temp);
+            }
+        }    
+        return longest;    
     }
 }
