@@ -32,12 +32,13 @@ class Solution {
         boolean up=search(board,word,row-1,col,count+1);
         boolean right=search(board,word,row,col+1,count+1);
         boolean down=search(board,word,row+1,col,count+1);
-
+        board[row][col]=temp;
+        
         if(up || down || right || left)
         {
             return true;
         }
-        board[row][col]=temp;
+        
         return false;
     }
 }
