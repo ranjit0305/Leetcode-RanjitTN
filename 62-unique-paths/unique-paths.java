@@ -1,24 +1,29 @@
 
 class Solution {
     public int uniquePaths(int m, int n) {
-        int[][] arr = new int[m][n];
-        return helper(arr, m - 1, n - 1);
+        int[][] obstacleGrid = new int[m][n];
+        int[][] dp = new int[m][n];
+        for(int i=0;i<dp.length;i++)
+        {
+            Arrays.fill(dp[i],-1);
+        }
+        return helper(obstacleGrid,m-1,n-1,dp);
+        
     }
 
-    public int helper(int arr[][],int m,int n)
+    public int helper(int arr[][],int m,int n,int[][]dp)
     {
         if(m<0 || n<0) return 0;
 
         if(m==0 && n==0) 
         {
-            arr[m][n]=1;
             return 1;
         }
 
-        if(arr[m][n]>0) return arr[m][n];
+        if(dp[m][n]!=-1) return dp[m][n];
 
-        arr[m][n]=helper(arr,m,n-1)+helper(arr,m-1,n);
-
-        return arr[m][n];
+        int takeup=helper(arr,m-1,n,dp);
+        int takeleft=helper(arr,m,n-1,dp);
+        return dp[m][n]=takeup+takeleft;
     }
 }
