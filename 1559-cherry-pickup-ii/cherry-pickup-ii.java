@@ -20,11 +20,11 @@ class Solution {
         int n = grid[0].length;
 
         if (j1 < 0 || j1 >= n || j2 < 0 || j2 >= n) {
-            return Integer.MIN_VALUE;
+            return 0;
         }
-
+        //Imp step
         int sum = grid[i][j1];
-
+        //Imp step
         if (j1 != j2) {
             sum = sum + grid[i][j2];
         }
@@ -37,7 +37,6 @@ class Solution {
         int downtake = helper(grid, i + 1, j1, j2,dp);
         int downtake1 = helper(grid, i + 1, j1, j2 - 1,dp);
         int downtake2 = helper(grid, i + 1, j1, j2 + 1,dp);
-
 
         int lefttake1 = helper(grid, i + 1, j1 - 1, j2 - 1,dp);
         int lefttake2 = helper(grid, i + 1, j1 - 1, j2,dp);
