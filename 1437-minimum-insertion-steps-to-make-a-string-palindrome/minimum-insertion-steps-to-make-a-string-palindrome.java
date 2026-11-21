@@ -15,15 +15,18 @@ class Solution {
         if(s_index>e_index) return 0;
         if(s_index==e_index) return 1;
         if(dp[s_index][e_index]!=-1) return dp[s_index][e_index];
-
+        int take=0;
+        int nottake1=0;
+        int nottake2=0;
         if(s.charAt(s_index)==s.charAt(e_index))
         {
-            dp[s_index][e_index]=2+longestpalindrome(s,s_index+1,e_index-1,dp);
+            take=2+longestpalindrome(s,s_index+1,e_index-1,dp);
         }
         else
         {
-            dp[s_index][e_index]=Math.max(longestpalindrome(s,s_index,e_index-1,dp),longestpalindrome(s,s_index+1,e_index,dp));
+            nottake1=longestpalindrome(s,s_index,e_index-1,dp);
+            nottake2=longestpalindrome(s,s_index+1,e_index,dp);
         }
-        return dp[s_index][e_index];
+        return dp[s_index][e_index]=Math.max(take,Math.max(nottake1,nottake2));
     }
 }
